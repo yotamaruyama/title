@@ -19,3 +19,17 @@ class Cursor():
 
     def draw(self, screen):
         pygame.draw.polygon(screen, self.color, ([self.x, self.y], [self.x, self.y + 20], [self.x + 20, self.y + 10]))
+
+    def move(self,screen,new_x,new_y):
+        deleteCursor = Cursor(self.x,self.y,(0,0,0))
+        deleteCursor.draw(screen)
+        if new_x == None:
+            new_x = self.x
+        self.x = new_x
+        self.y = new_y
+        self.draw(screen)
+
+    def delete(self,screen,new_x,new_y):
+        self.deleteCursor.draw(screen)
+        self.deleteCursor.x = new_x
+        self.deleteCursor.y = new_y
