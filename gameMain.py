@@ -15,7 +15,14 @@ class GameMain:
         self.titleScreen = Title(self.screen)
         self.selectMusicScreen = SelectMusic(self.screen)
         self.mode = "Title"
-    
+        self.old = self.mode
+
+    def changemode(self):
+        new = self.mode
+        if self.old != new:
+            self.selectMusicScreen.gameninit()
+            self.old = new
+
     def update(self):
         
         events = pygame.event.get()
@@ -30,13 +37,16 @@ class GameMain:
                if event.key == K_a:
                    self.mode = "SelectMusic"
 
-
+        self.changemode()
            
         if self.mode == "Title":
             self.titleScreen.update(events)
             
         elif self.mode == "SelectMusic":
             self.selectMusicScreen.update(events)
+
+
+
 
 
    #     elif self.mode == "SelectMusic":
@@ -46,6 +56,8 @@ class GameMain:
             self.update()
            
             pygame.display.update()
+    
+
         
 if __name__ == "__main__":
     

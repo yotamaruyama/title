@@ -80,15 +80,15 @@ class Title :
                 
     def inputUp(self):
         if self.select == 0:
-            self.mycursor.move(self.screen,new_x=None,new_y=230)
+            self.mycursor.replace(self.screen,new_x=None,new_y=230)
         elif self.select == 1:
-            self.mycursor.move(self.screen,new_x=None,new_y=280)
+            self.mycursor.replace(self.screen,new_x=None,new_y=280)
 
     def inputDown(self):
         if self.select == 1:
-            self.mycursor.move(self.screen,new_x=None,new_y=280)
+            self.mycursor.replace(self.screen,new_x=None,new_y=280)
         elif self.select == 0:
-            self.mycursor.move(self.screen,new_x=None,new_y=230)
+            self.mycursor.replace(self.screen,new_x=None,new_y=230)
 if __name__ == "__main__":
    
     pygame.init()
