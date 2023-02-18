@@ -36,11 +36,12 @@ class GameMain:
             self.titleScreen.update(events)
             
         elif self.mode == "SelectMusic":
-            self.selectMusicScreen.blackOut()
+            self.selectMusicScreen.update(events)
 
 
    #     elif self.mode == "SelectMusic":
     def main(self):
+        self.titleScreen.init()
         while True:
             self.update()
            
@@ -48,5 +49,5 @@ class GameMain:
         
 if __name__ == "__main__":
     
-
-    GameMain().main()
+    mainObj=GameMain()
+    mainObj.main()

@@ -16,6 +16,9 @@ class Title :
         self.start = self.menu_font.render(u"はじめる", True, (255, 255, 255))
         self.exit = self.menu_font.render(u"やめる", True, (255, 255, 255))
         self.credit = self.credit_font.render(u"Group Yellow", True, (255, 255, 255))
+        
+
+    def init(self) :
         self.screen.fill((0, 0, 0))
         self.screen.blit(self.title, ((320 - (self.title.get_width() / 2)), 100))
         self.screen.blit(self.credit, ((320 - (self.credit.get_width() / 2)), 420))
@@ -24,6 +27,7 @@ class Title :
         self.mycursor = cursor.Cursor(220, 230, (255, 255, 255))
         self.mycursor.draw(self.screen)
         self.select = 0
+        
         
 
     def main(self):
