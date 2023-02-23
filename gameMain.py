@@ -60,4 +60,4 @@ class GameMain:
 if __name__ == "__main__":
 
     mainObj = GameMain()
-    mainObj.main()
+    print(mainObj.mode)

@@ -5,9 +5,11 @@ import pygame
 from pygame.locals import *
 
 import cursor
+from key_parent import key_parent
 
 
-class Title:
+
+class Title(key_parent):
 
     def __init__(self, screen):
 
@@ -46,11 +48,11 @@ class Title:
                     continue
 
                 if event.key == K_DOWN:
-                    self.inputDown()
+                    self.down_input()
                     self.select = 1 - self.select
 
                 if event.key == K_UP:
-                    self.inputUp()
+                    self.up_input()
                     self.select = 1 - self.select
 
             pygame.display.update()
@@ -66,23 +68,23 @@ class Title:
                 continue
 
             if event.key == K_DOWN:
-                self.inputDown()
+                self.down_input()
                 self.select = 1 - self.select
 
             if event.key == K_UP:
-                self.inputUp()
+                self.up_input()
                 self.select = 1 - self.select
 
             pygame.display.update()
             self.mycursor.draw(self.screen)
 
-    def inputUp(self):
+    def up_input(self):
         if self.select == 0:
             self.mycursor.replace(self.screen, new_x=None, new_y=230)
         elif self.select == 1:
             self.mycursor.replace(self.screen, new_x=None, new_y=280)
 
-    def inputDown(self):
+    def down_input(self):
         if self.select == 1:
             self.mycursor.replace(self.screen, new_x=None, new_y=280)
         elif self.select == 0:
