@@ -9,10 +9,11 @@ import cursor
 
 class SelectMusic:
 
-    def __init__(self, screen):
+    def __init__(self, screen, gameMain):
         self.screen = screen
-        self.music = ["馬ぴょい", "YMCA", "粉雪"]
+        self.music = ["YoungMan", "U.S.A", "馬ぴょい"]
         """曲名のリスト"""
+        self.gameMain = gameMain
         self.title_font = pygame.font.Font("data/minamoji04.ttf", 48)
         self.menu_font = pygame.font.Font("data/minamoji04.ttf", 32)
         self.credit_font = pygame.font.SysFont(None, 32)
@@ -66,8 +67,11 @@ class SelectMusic:
             if event.key == K_UP:
                 self.inputUp()
 
+            if event.key == K_RETURN:
+                self.kettei()
+
             pygame.display.update()
-            self.mycursor.draw(self.screen)
+            # self.mycursor.draw(self.screen)
         # self.screen.fill((0, 0, 0))
 
     def inputUp(self):
@@ -82,6 +86,19 @@ class SelectMusic:
             return
         self.mycursor.move(self.screen, move_y=+self.blank)
         self.select += 1
+
+    def aruduino_btn(self):
+        return
+
+    def kettei(self):
+        if self.select == self.number_of_items - 1:
+            self.gameMain.gamenseni("Title")
+            # startnimodoru
+            return
+        else:
+            # playgameに曲番号を送るのとarduinoに曲番号を渡す
+            self.gameMain.gamenseni("SelectMucic")
+            return
 
 
 if __name__ == "__main__":

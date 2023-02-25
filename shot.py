@@ -3,13 +3,15 @@ from pygame.locals import *
 
 import tools
 
+
 class Shot(pygame.sprite.Sprite):
     animecycle = 6
     speed = 9
 
     def __init__(self, pos, direction):
         pygame.sprite.Sprite.__init__(self, self.containers)
-        self.images = tools.split_image(tools.load_image("data", "shot.png"), 4, 1)
+        self.images = tools.split_image(
+            tools.load_image("data", "shot.png"), 4, 1)
         self.image = self.images[0]
         self.rect = self.image.get_rect()
         self.rect.center = pos

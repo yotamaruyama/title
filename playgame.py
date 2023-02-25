@@ -3,16 +3,16 @@ import sys
 
 import pygame
 from pygame.locals import *
+
 import cursor
 from key_parent import key_parent
 
 
-class Title(key_parent):
+class Playgame(key_parent):
 
-    def __init__(self, screen, gameMain):
+    def __init__(self, screen):
 
         self.screen = screen
-        self.gameMain = gameMain
         self.title_font = pygame.font.Font("data/minamoji04.ttf", 48)
         self.menu_font = pygame.font.Font("data/minamoji04.ttf", 32)
         self.credit_font = pygame.font.SysFont(None, 32)
@@ -58,47 +58,13 @@ class Title(key_parent):
             self.mycursor.draw(self.screen)
 
     def update(self, events):
-        for event in events:
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
-
-            if event.type != KEYDOWN:
-                continue
-
-            if event.key == K_DOWN:
-                self.down_input()
-
-            if event.key == K_UP:
-                self.up_input()
-
-            if event.key == K_RETURN:
-                self.kettei()
 
         pygame.display.update()
 
     def up_input(self):
-        if self.select == 0:
-            self.mycursor.replace(self.screen, new_x=None, new_y=230)
-            self.select = 1
-        elif self.select == 1:
-            self.mycursor.replace(self.screen, new_x=None, new_y=280)
-            self.select = 0
-
-    def down_input(self):
-        if self.select == 0:
-            self.mycursor.replace(self.screen, new_x=None, new_y=230)
-            self.select = 1
-        elif self.select == 1:
-            self.mycursor.replace(self.screen, new_x=None, new_y=280)
-            self.select = 0
-
-    def aruduino_btn(self):
         return
 
-    def kettei(self):
-        if self.select == 0:
-            self.gameMain.gamenseni("SelectMusic")
+    def down_input(self):
         return
 
 
@@ -107,7 +73,7 @@ if __name__ == "__main__":
     pygame.display.set_caption("sample")
     SCREEN_SIZE = Rect(0, 0, 640, 480)
     screen = pygame.display.set_mode(SCREEN_SIZE.size)
-    mainObj = Title(screen)
+    mainObj = Playgame(screen)
     mainObj.gameninit()
     while True:
         mainObj.update(pygame.event.get())

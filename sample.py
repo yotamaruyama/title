@@ -3,10 +3,17 @@ import pygame
 from pygame.locals import *
 import sys
 
-import cursor, tools, player, enemy, bar, shot, title
+import cursor
+import tools
+import player
+import enemy
+import bar
+import shot
+import title
 
 SCR_RECT = Rect(0, 0, 640, 480)
 TITLE, STAGE = range(2)
+
 
 class Main():
     def __init__(self):
@@ -91,7 +98,8 @@ class Main():
                         self.title.select += 1
 
     def collision_detection(self):
-        enemy_collided = pygame.sprite.spritecollide(self.player, self.enemies, False)
+        enemy_collided = pygame.sprite.spritecollide(
+            self.player, self.enemies, False)
         if enemy_collided:
             if self.player.invincible == False:
                 # SEを再生する
@@ -99,10 +107,12 @@ class Main():
                 self.hp.hp -= 1
                 self.player.invincible = True
         # 弾と敵との当たり判定
-        shot_collided = pygame.sprite.groupcollide(self.enemies, self.shots, True, True)
+        shot_collided = pygame.sprite.groupcollide(
+            self.enemies, self.shots, True, True)
 
     def load_sounds(self):
         self.damage_sound = tools.load_sound("damage.wav")
+
 
 if __name__ == "__main__":
     Main()

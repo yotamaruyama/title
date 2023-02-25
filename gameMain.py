@@ -14,16 +14,11 @@ class GameMain:
         pygame.display.set_caption("sample")
         SCREEN_SIZE = Rect(0, 0, 640, 480)
         self.screen = pygame.display.set_mode(SCREEN_SIZE.size)
-        self.titleScreen = Title(self.screen)
-        self.selectMusicScreen = SelectMusic(self.screen)
+        self.titleScreen = Title(self.screen,self)
+        self.selectMusicScreen = SelectMusic(self.screen, self)
         self.mode = "Title"
         self.old = self.mode
 
-    def changemode(self):
-        new = self.mode
-        if self.old != new:
-            self.selectMusicScreen.gameninit()
-            self.old = new
 
     def update(self):
 
@@ -35,11 +30,6 @@ class GameMain:
 
             if event.type != KEYDOWN:
                 continue
-
-            if event.key == K_a:
-                self.mode = "SelectMusic"
-
-        self.changemode()
 
         if self.mode == "Title":
             self.titleScreen.update(events)
@@ -56,8 +46,17 @@ class GameMain:
             pygame.time.delay(20)
             pygame.display.update()
 
+    def gamenseni(self, mode):
+        self.mode = mode
+        if mode == "Title":
+            self.titleScreen.gameninit()
+
+        elif mode == "SelectMusic":
+            self.selectMusicScreen.gameninit()
+
 
 if __name__ == "__main__":
 
     mainObj = GameMain()
+    mainObj.main()
     print(mainObj.mode)
