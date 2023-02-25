@@ -10,15 +10,15 @@ from key_parent import key_parent
 
 import abc
 
+
 class Base_CursorScreen(metaclass=abc.ABCMeta):
 
-    def __init__(self, screen,columNumber):
+    def __init__(self, screen, columNumber):
 
         self.screen = screen
         self.columNumber = columNumber
         self.title_font = pygame.font.Font("data/minamoji04.ttf", 48)
         self.menu_font = pygame.font.Font("data/minamoji04.ttf", 32)
-
 
     def inputUp(self):
         if self.select == 0:
@@ -32,4 +32,3 @@ class Base_CursorScreen(metaclass=abc.ABCMeta):
             return
         self.mycursor.move(self.screen, move_y=+self.blank)
         self.select += 1
-    

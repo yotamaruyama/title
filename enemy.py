@@ -5,6 +5,7 @@ import math
 
 import tools
 
+
 class Enemy(pygame.sprite.Sprite):
     speed = 5
 

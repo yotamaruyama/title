@@ -4,6 +4,7 @@ import sys
 
 import cursor
 
+
 class Title():
     def __init__(self):
         self.frame = 0
@@ -15,7 +16,8 @@ class Title():
         self.title = self.title_font.render(u"わくわくリズム", True, (255, 255, 255))
         self.start = self.menu_font.render(u"はじめる", True, (255, 255, 255))
         self.exit = self.menu_font.render(u"やめる", True, (255, 255, 255))
-        self.credit = self.credit_font.render(u"Group Yellow", True, (255, 255, 255))
+        self.credit = self.credit_font.render(
+            u"Group Yellow", True, (255, 255, 255))
 
         self.cursor = cursor.Cursor(220, 230, (255, 255, 255))
 

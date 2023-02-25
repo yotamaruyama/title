@@ -14,11 +14,10 @@ class GameMain:
         pygame.display.set_caption("sample")
         SCREEN_SIZE = Rect(0, 0, 640, 480)
         self.screen = pygame.display.set_mode(SCREEN_SIZE.size)
-        self.titleScreen = Title(self.screen,self)
+        self.titleScreen = Title(self.screen, self)
         self.selectMusicScreen = SelectMusic(self.screen, self)
         self.mode = "Title"
         self.old = self.mode
-
 
     def update(self):
 
