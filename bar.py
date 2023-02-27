@@ -1,29 +1,34 @@
 import pygame
 from pygame.locals import *
 
+
 class HealthBar():
     def __init__(self, x, y, width, max):
         self.x = x
         self.y = y
         self.width = width
-        self.max = max # 最大HP
-        self.hp = max # HP
-        self.mark = int((self.width - 4) / self.max) # HPバーの1目盛り
+        self.max = max  # 最大HP
+        self.hp = max  # HP
+        self.mark = int((self.width - 4) / self.max)  # HPバーの1目盛り
 
         self.font = pygame.font.SysFont(None, 28)
         self.label = self.font.render("HP", True, (255, 255, 255))
-        self.frame = Rect(self.x + 2 + self.label.get_width(), self.y, self.width, self.label.get_height())
-        self.bar = Rect(self.x + 4 + self.label.get_width(), self.y + 2, self.width - 4, self.label.get_height() - 4)
-        self.value = Rect(self.x + 4 + self.label.get_width(), self.y + 2, self.width - 4, self.label.get_height() - 4)
+        self.frame = Rect(self.x + 2 + self.label.get_width(),
+                          self.y, self.width, self.label.get_height())
+        self.bar = Rect(self.x + 4 + self.label.get_width(),
+                        self.y + 2, self.width - 4, self.label.get_height() - 4)
+        self.value = Rect(self.x + 4 + self.label.get_width(),
+                          self.y + 2, self.width - 4, self.label.get_height() - 4)
 
         # effect_barを追加
-        self.effect_bar = Rect(self.x + 4 + self.label.get_width(), self.y + 2, self.width - 4, self.label.get_height() - 4)
+        self.effect_bar = Rect(self.x + 4 + self.label.get_width(),
+                               self.y + 2, self.width - 4, self.label.get_height() - 4)
         self.effect_color = (0, 255, 255)
 
     def update(self):
         if self.hp >= self.max:
             self.hp = self.max
-            
+
         if self.effect_bar.width > self.mark * self.hp:
             self.value.width = self.mark * self.hp
             if self.effect_bar.width >= self.value.width:

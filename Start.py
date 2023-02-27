@@ -47,12 +47,12 @@ class Title(key_parent):
                     continue
 
                 if event.key == K_DOWN:
-                    self.down_input()
                     self.select = 1 - self.select
+                    self.down_input()
 
                 if event.key == K_UP:
-                    self.up_input()
                     self.select = 1 - self.select
+                    self.up_input()
 
             pygame.display.update()
             self.mycursor.draw(self.screen)
@@ -67,9 +67,12 @@ class Title(key_parent):
                 continue
 
             if event.key == K_DOWN:
+
+                self.select = 1 - self.select
                 self.down_input()
 
             if event.key == K_UP:
+                self.select = 1 - self.select
                 self.up_input()
 
             if event.key == K_RETURN:
@@ -80,18 +83,14 @@ class Title(key_parent):
     def up_input(self):
         if self.select == 0:
             self.mycursor.replace(self.screen, new_x=None, new_y=230)
-            self.select = 1
         elif self.select == 1:
             self.mycursor.replace(self.screen, new_x=None, new_y=280)
-            self.select = 0
 
     def down_input(self):
         if self.select == 0:
             self.mycursor.replace(self.screen, new_x=None, new_y=230)
-            self.select = 1
         elif self.select == 1:
             self.mycursor.replace(self.screen, new_x=None, new_y=280)
-            self.select = 0
 
     def aruduino_btn(self):
         return

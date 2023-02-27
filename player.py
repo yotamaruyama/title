@@ -1,7 +1,9 @@
 import pygame
 from pygame.locals import *
 
-import tools, shot
+import tools
+import shot
+
 
 class Player(pygame.sprite.Sprite):
     speed = 5
@@ -13,7 +15,8 @@ class Player(pygame.sprite.Sprite):
 
     def __init__(self, pos):
         pygame.sprite.Sprite.__init__(self, self.containers)
-        self.images = tools.split_image(tools.load_image("data", "rabipple.png"), 2, 2)
+        self.images = tools.split_image(
+            tools.load_image("data", "rabipple.png"), 2, 2)
         self.image = self.images[0]
         self.rect = self.image.get_rect()
         self.rect.center = pos
@@ -24,7 +27,8 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         self.frame += 1
-        self.image = self.images[(self.direction * 2) + int(self.frame / self.animecycle % 2)]
+        self.image = self.images[(self.direction * 2) +
+                                 int(self.frame / self.animecycle % 2)]
         pressed_keys = pygame.key.get_pressed()
         if pressed_keys[K_LEFT]:
             self.frame += 1
