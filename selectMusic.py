@@ -92,6 +92,7 @@ class SelectMusic:
 
     def kettei(self):
         if self.select == self.number_of_items - 1:
+            self.gameMain.musicnumber = self.select
             self.gameMain.gamenseni("Title")
             # startnimodoru
             return

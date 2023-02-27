@@ -17,7 +17,7 @@ class GameMain:
         self.titleScreen = Title(self.screen, self)
         self.selectMusicScreen = SelectMusic(self.screen, self)
         self.mode = "Title"
-        self.old = self.mode
+        self.musicnumber = -1
 
     def update(self):
 
