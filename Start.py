@@ -101,6 +101,7 @@ class Title(key_parent):
         return
 
 
+
 if __name__ == "__main__":
     pygame.init()
     pygame.display.set_caption("sample")

@@ -92,13 +92,14 @@ class SelectMusic:
 
     def kettei(self):
         if self.select == self.number_of_items - 1:
-            self.gameMain.musicnumber = self.select
             self.gameMain.gamenseni("Title")
             # startnimodoru
             return
         else:
             # playgameに曲番号を送るのとarduinoに曲番号を渡す
-            self.gameMain.gamenseni("SelectMucic")
+            
+            self.gameMain.musicnumber = self.select
+            self.gameMain.gamenseni("playgame")
             return
 
 
