@@ -39,6 +39,9 @@ class GameMain:
         elif self.mode == "SelectMusic":
             self.selectMusicScreen.update(events)
 
+        elif self.mode == "playgame":
+            self.playgame.update(events)
+
    #     elif self.mode == "SelectMusic":
 
     def main(self):

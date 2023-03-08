@@ -39,20 +39,32 @@ class Playgame(key_parent):
                 if event.type != KEYDOWN:
                     continue
 
-                if event.key == K_DOWN:
-                    self.down_input()
-                    self.select = 1 - self.select
-
-                if event.key == K_UP:
-                    self.up_input()
-                    self.select = 1 - self.select
-
+                
             pygame.display.update()
             self.mycursor.draw(self.screen)
 
     def update(self, events):
+        for event in events:
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
 
-        pygame.display.update()
+            if event.type != KEYDOWN:
+                continue
+
+            if event.key == K_DOWN:
+                self.inputDown()
+
+            if event.key == K_UP:
+                self.inputUp()
+
+            if event.key == K_RETURN:
+                continue
+
+            if event.key == K_ESCAPE:
+                self.kettei()
+
+            pygame.display.update()
 
     def up_input(self):
         return
@@ -64,7 +76,7 @@ class Playgame(key_parent):
         return
 
     def kettei(self):
-        return
+        self.gameMain.gamenseni("SelectMusic")
 
 
 if __name__ == "__main__":
