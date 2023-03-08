@@ -2,7 +2,7 @@
 import sys
 sys.path.append('./project_posenet')
 from project_posenet.pose_judge import calculate_jointAngles, calculate_leftelbow, pose_check
-
+import tools
 
 import cv2
 
@@ -19,6 +19,9 @@ from project_posenet.pose_judge import *
 
 import numpy as np
 import os
+
+#矢印速度
+notes_speed = 10
 
 
 class Playgame(key_parent):
@@ -39,6 +42,7 @@ class Playgame(key_parent):
         
 
     def gameninit(self):
+        self.image = tools.load_image("data", "yazirusi.png").convert()
         self.cap = cv2.VideoCapture(0)
         self.screen.fill((0, 0, 0))
         self.title = self.title_font.render((str)(self.score), True, (255, 255, 255))
