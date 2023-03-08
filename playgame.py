@@ -35,13 +35,13 @@ class Playgame(key_parent):
         self.credit = self.credit_font.render(
             u"Group Yellow", True, (255, 255, 255))
         self.engine = PoseEngine('/home/io-circle/windowapps/title/project_posenet/models/mobilenet/posenet_mobilenet_v1_075_481_641_quant_decoder_edgetpu.tflite')
-
+        self.score = "unko"
         
 
     def gameninit(self):
         self.cap = cv2.VideoCapture(0)
         self.screen.fill((0, 0, 0))
-        self.title = self.title_font.render((str)(self.gameMain.musicnumber), True, (255, 255, 255))
+        self.title = self.title_font.render((str)(self.score), True, (255, 255, 255))
         self.screen.blit(self.title, ((320 - (self.title.get_width() / 2)), 100))
         self.select = 0
 
@@ -61,20 +61,26 @@ class Playgame(key_parent):
             self.mycursor.draw(self.screen)
 
     def update(self, events):
+        #self.screen.fill((0,0,0))
         # 1フレーム毎　読込み
         ret, frame = self.cap.read()
         cv2.imshow("Camera", frame)
+        frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
         poses, inference_time = self.engine.DetectPosesInImage(Image.fromarray(frame))
         frame = cv2.rotate(frame,cv2.ROTATE_90_COUNTERCLOCKWISE)
-        frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
         poseframe = pygame.surfarray.make_surface(frame)
         self.screen.blit(poseframe,(0,0))
+        self.screen.blit(self.title, ((320 - (self.title.get_width() / 2)), 100))
         for pose in poses:
             if pose.score < 0.4: continue
             calculate_leftelbow(pose)
             angles = calculate_jointAngles(pose)
-            pose_check(pose,angles)
+            self.score = pose_check(pose,angles)
+            self.title = self.title_font.render((str)(self.score), True, (255, 255, 255))
+
             #print(poses)
+        
+        
         for event in events:
             if event.type == QUIT:
                 pygame.quit()
@@ -84,10 +90,10 @@ class Playgame(key_parent):
                 continue
 
             if event.key == K_DOWN:
-                self.inputDown()
+                self.down_input()
 
             if event.key == K_UP:
-                self.inputUp()
+                self.up_input()
 
             if event.key == K_RETURN:
                 continue
@@ -99,9 +105,9 @@ class Playgame(key_parent):
 
     def up_input(self):
         return
-
     def down_input(self):
-        return
+        self.score = "timpo"
+        self.title = self.title_font.render((str)(self.score), True, (255, 255, 255))
 
     def aruduino_btn(self):
         return

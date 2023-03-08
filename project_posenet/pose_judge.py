@@ -135,10 +135,13 @@ def pose_check(pose, angles):
         lHandUp = 1
 
     if rHandUp == 1 and lHandUp == 1:
-        result = print('BANZAI')
+        result = 'BANZAI'
+        print(result)
     elif rHandUp == 1:
-        result = print('RIGHT HAD UP')
+        result = 'RIGHT HAD UP'
+        print(result)
     elif lHandUp == 1:
-        result = print('LEFT HAD UP')
+        result = 'LEFT HAD UP'
+        print(result)
 
     return result
