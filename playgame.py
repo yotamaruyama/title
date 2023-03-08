@@ -1,11 +1,24 @@
 #!/usr/bin/env python
 import sys
+sys.path.append('./project_posenet')
+from project_posenet.pose_judge import calculate_jointAngles, calculate_leftelbow, pose_check
+
+
+import cv2
+
 
 import pygame
 from pygame.locals import *
 
 import cursor
 from key_parent import key_parent
+from project_posenet.pose_engine import PoseEngine
+from PIL import Image
+from PIL import ImageDraw
+from project_posenet.pose_judge import *
+
+import numpy as np
+import os
 
 
 class Playgame(key_parent):
@@ -21,8 +34,12 @@ class Playgame(key_parent):
         # self.exit = self.menu_font.render(u"やめる", True, (255, 255, 255))
         self.credit = self.credit_font.render(
             u"Group Yellow", True, (255, 255, 255))
+        self.engine = PoseEngine('/home/io-circle/windowapps/title/project_posenet/models/mobilenet/posenet_mobilenet_v1_075_481_641_quant_decoder_edgetpu.tflite')
+
+        
 
     def gameninit(self):
+        self.cap = cv2.VideoCapture(0)
         self.screen.fill((0, 0, 0))
         self.title = self.title_font.render((str)(self.gameMain.musicnumber), True, (255, 255, 255))
         self.screen.blit(self.title, ((320 - (self.title.get_width() / 2)), 100))
@@ -44,6 +61,20 @@ class Playgame(key_parent):
             self.mycursor.draw(self.screen)
 
     def update(self, events):
+        # 1フレーム毎　読込み
+        ret, frame = self.cap.read()
+        cv2.imshow("Camera", frame)
+        poses, inference_time = self.engine.DetectPosesInImage(Image.fromarray(frame))
+        frame = cv2.rotate(frame,cv2.ROTATE_90_COUNTERCLOCKWISE)
+        frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+        poseframe = pygame.surfarray.make_surface(frame)
+        self.screen.blit(poseframe,(0,0))
+        for pose in poses:
+            if pose.score < 0.4: continue
+            calculate_leftelbow(pose)
+            angles = calculate_jointAngles(pose)
+            pose_check(pose,angles)
+            #print(poses)
         for event in events:
             if event.type == QUIT:
                 pygame.quit()
