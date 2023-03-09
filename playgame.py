@@ -38,7 +38,7 @@ class Playgame(key_parent):
         self.credit = self.credit_font.render(
             u"Group Yellow", True, (255, 255, 255))
         self.engine = PoseEngine('/home/io-circle/windowapps/title/project_posenet/models/mobilenet/posenet_mobilenet_v1_075_481_641_quant_decoder_edgetpu.tflite')
-        self.score = "unko"
+        self.score = "Now Loading..."
         
 
     def gameninit(self):
